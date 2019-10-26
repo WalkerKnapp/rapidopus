@@ -1,0 +1,3 @@
+rootProject.name = 'rapidopus'
+include 'rapidopus-java'
+include 'rapidopus-natives'
