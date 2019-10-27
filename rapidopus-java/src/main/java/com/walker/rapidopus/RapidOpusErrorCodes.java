@@ -1,3 +1,5 @@
+package com.walker.rapidopus;
+
 public class RapidOpusErrorCodes {
     /**
      * No Error

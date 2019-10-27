@@ -1,3 +1,5 @@
+package com.walker.rapidopus;
+
 import java.lang.ref.Cleaner;
 
 public class RapidOpus {

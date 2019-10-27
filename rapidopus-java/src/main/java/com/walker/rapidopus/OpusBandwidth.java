@@ -1,3 +1,5 @@
+package com.walker.rapidopus;
+
 public enum OpusBandwidth {
     /**
      *  < 4 kHz bandpass

@@ -1,3 +1,5 @@
+package com.walker.rapidopus;
+
 public enum OpusApplicationMode {
     /**
      * Gives best quality at a given bitrate for voice signals.
