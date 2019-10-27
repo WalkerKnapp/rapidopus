@@ -36,3 +36,15 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+processResources {
+    dependsOn ":rapidopus-natives:assemble"
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs 'src/main/resources', project(":rapidopus-natives").buildDir.getAbsolutePath() + '/lib/main/debug'
+        }
+    }
+}
