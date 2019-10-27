@@ -20,11 +20,37 @@ public class OpusDecoder implements AutoCloseable {
 
     private final long structPointer;
 
+    /**
+     * Creates and initializes an opus decoder.
+     *
+     * Internally Opus stores data at 48000 Hz, so that should be the default value for Fs.
+     * However, the decoder can efficiently decode to buffers at 8, 12, 16, and 24 kHz so
+     * if for some reason the caller cannot use data at the full sample rate, or knows the
+     * compressed data doesn't use the full frequency range, it can request decoding at a reduced rate.
+     *
+     * Likewise, the decoder is capable of filling in either mono or interleaved stereo pcm buffers,
+     * at the caller's request.
+     *
+     * @param sampleRate Sample rate to decode at, in Hz
+     * @param channels Number of channels (Must be 1 or 2) to decode.
+     */
     public OpusDecoder(int sampleRate, int channels) {
         this.structPointer = decoderCreate(sampleRate, channels);
 
         this.state = new State(structPointer);
         this.cleanable = RapidOpus.cleaner.register(this, state);
+    }
+
+    /**
+     * Creates and initializes an opus decoder.
+     *
+     * The decoder is capable of filling in either mono or interleaved
+     * stereo pcm buffers at the caller's request.
+     *
+     * @param channels Number of channels (Must be 1 or 2) to decode.
+     */
+    public OpusDecoder(int channels) {
+        this(48000, channels);
     }
 
     /**
@@ -156,7 +182,7 @@ public class OpusDecoder implements AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         cleanable.clean();
     }
 
