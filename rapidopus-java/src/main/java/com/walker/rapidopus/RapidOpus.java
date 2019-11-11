@@ -21,11 +21,18 @@ public class RapidOpus {
         }
     }
 
-        /**
-         * Gets the libopus version string.
-         * If the build is fixed-point, will have the substring "-fixed," otherwise the build is floating-point.
-         *
-         * @return The version string.
-         */
+    public static void loadLibraries() {
+        // TODO: Move the load code from static to here.
+        // Do something to force this method to not be optimized away.
+        Thread.onSpinWait();
+        System.out.println("Libraries loaded.");
+    }
+
+    /**
+    * Gets the libopus version string.
+    * If the build is fixed-point, will have the substring "-fixed," otherwise the build is floating-point.
+    *
+    * @return The version string.
+    */
     public static native String getVersion();
 }

@@ -33,10 +33,13 @@ public class OpusEncoder implements AutoCloseable {
      * @param applicationMode Application mode.
      */
     public OpusEncoder(int sampleRate, int channels, OpusApplicationMode applicationMode) {
+        // This line needs to be here, since RapidOpus must be forced to load before native methods can be called.
+        Cleaner cleaner = RapidOpus.cleaner;
+
         this.structPointer = encoderCreate(sampleRate, channels, applicationMode.id);
 
         this.state = new State(structPointer);
-        this.cleanable = RapidOpus.cleaner.register(this, state);
+        this.cleanable = cleaner.register(this, state);
     }
 
     /**

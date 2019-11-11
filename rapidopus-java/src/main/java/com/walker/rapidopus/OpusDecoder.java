@@ -37,10 +37,13 @@ public class OpusDecoder implements AutoCloseable {
      * @param channels Number of channels (Must be 1 or 2) to decode.
      */
     public OpusDecoder(int sampleRate, int channels) {
+        // This line needs to be here, since RapidOpus must be forced to load before native methods can be called.
+        Cleaner cleaner = RapidOpus.cleaner;
+
         this.structPointer = decoderCreate(sampleRate, channels);
 
         this.state = new State(structPointer);
-        this.cleanable = RapidOpus.cleaner.register(this, state);
+        this.cleanable = cleaner.register(this, state);
     }
 
     /**
@@ -53,6 +56,75 @@ public class OpusDecoder implements AutoCloseable {
      */
     public OpusDecoder(int channels) {
         this(48000, channels);
+    }
+
+    // Generic CTLs
+
+    /**
+     * Resets the decoder to a freshly initialized state.
+     */
+    public void resetState() {
+        decoderResetState(structPointer);
+    }
+
+    /**
+     * Gets the decoder's last bandpass.
+     *
+     * @return The decoder's last bandpass.
+     */
+    public OpusBandwidth getBandwidth() {
+        return OpusBandwidth.valueOf(decoderGetBandwidth(structPointer));
+    }
+
+    /**
+     * Gets the sampling rate the decoder was initialized with.
+     *
+     * @return The sample rate
+     */
+    public int getSampleRate() {
+        return decoderGetSampleRate(structPointer);
+    }
+
+    // Decoder CTLs
+
+    /**
+     * Returns the amount the decoder is scaling the signal by in Q8 dB units.
+     *
+     * @return The current gain
+     */
+    public int getGain() {
+        return decoderGetGain(structPointer);
+    }
+
+    /**
+     * Sets the decoder gain adjustment.
+     * Scales the decoded output by a factor in Q8 dB units.
+     * This has a maximum range of -32768 to 32767 inclusive
+     * The default gain is 0 for no adjustment.
+     *
+     * @param gain The gain to set.
+     */
+    public void setGain(int gain) {
+        decoderSetGain(structPointer, gain);
+    }
+
+    /**
+     * Gets the pitch of the last decoded frame, if available.
+     * If the last frame was not voiced, or if the pitch was not coded in the frame, returns 0.
+     *
+     * @return Pitch period at 48kHz.
+     */
+    public int getLastFramePitch() {
+        return decoderGetLastFramePitch(structPointer);
+    }
+
+    /**
+     * Gets the duration (in samples) of the last packet decoded or concealed.
+     *
+     * @return Number of samples at current sampling rate.
+     */
+    public int getLastPacketDuration() {
+        return decoderGetLastPacketDuration(structPointer);
     }
 
     /**
@@ -412,7 +484,13 @@ public class OpusDecoder implements AutoCloseable {
     // Native Methods
 
     private static native long decoderCreate(int sampleRate, int channels);
-    // TODO: DecoderCtl
+    private static native void decoderResetState(long pDecoder);
+    private static native int decoderGetBandwidth(long pDecoder);
+    private static native int decoderGetSampleRate(long pDecoder);
+    private static native int decoderGetGain(long pDecoder);
+    private static native void decoderSetGain(long pDecoder, int gain);
+    private static native int decoderGetLastFramePitch(long pDecoder);
+    private static native int decoderGetLastPacketDuration(long pDecoder);
     private static native void decoderDestroy(long pDecoder);
 
     private static native int decode(long pDecoder, byte[] inputData, ByteBuffer outData, int frameSize, int decodeFec);
