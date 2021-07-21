@@ -1,5 +1,28 @@
 # rapidopus
-A performance-oriented java wrapper for libopus using JNI
+A performance-oriented Java wrapper for libopus using JNI.
+
+## Installation
+
+
+#### Gradle
+```groovy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'me.walkerknapp:rapidopus:1.1.0'
+}
+```
+
+#### Maven
+```xml
+<dependency>
+  <groupId>me.walkerknapp</groupId>
+  <artifactId>rapidopus</artifactId>
+  <version>1.1.0</version>
+</dependency>
+```
 
 ## Compiling
 
@@ -8,9 +31,6 @@ A performance-oriented java wrapper for libopus using JNI
   > git clone  https://github.com/WalkerKnapp/rapidopus.git 
   > cd devolay
   ```
-- Download Opus build from https://ci.appveyor.com/project/rillian/opus
-- Copy include folder to rapidopus-natives/libs/opus
-- Copy static library file to rapidopus-natives/libs/opus/lib
 - Run the automatic assembly:
   ```
   > ./gradlew assemble
