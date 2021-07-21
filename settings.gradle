@@ -3,3 +3,16 @@ include 'rapidopus-java'
 include 'rapidopus-natives'
 include 'examples'
 
+includeBuild("plugins")
+
+System.setProperty("CMAKE_TOOLCHAINS_CONFIG_SCRIPT", file("toolchains.gradle.kts").absolutePath)
+
+sourceControl {
+    gitRepository("https://github.com/xiph/opus") {
+        producesModule("org.opus-codec:opus")
+
+        plugins {
+            id "opus-build"
+        }
+    }
+}
