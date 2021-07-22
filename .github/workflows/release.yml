@@ -39,7 +39,7 @@ jobs:
           yes | PORTABLE=true ./build_binutils.sh
       - name: Add OSXCross to path
         run: |
-          export PATH=$PATH:$GITHUB_WORKSPACE/osxcross/target/bin
+          echo "$GITHUB_WORKSPACE/osxcross/target/bin" >> $GITHUB_PATH
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
