@@ -90,6 +90,7 @@ open class ToolchainConfiguration : RuleSource() {
                         it.assembler.executable = "o64-clang"
                         it.symbolExtractor.executable = "x86_64-apple-darwin19-objcopy"
                         it.stripper.executable = "x86_64-apple-darwin19-strip"
+                        it.staticLibArchiver.executable = "x86_64-apple-darwin19-ar"
 
                         it.cppCompiler.withArguments(addFpicArg)
                     }
