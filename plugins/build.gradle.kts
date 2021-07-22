@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation("me.walkerknapp.use-cmake-library:me.walkerknapp.use-cmake-library.gradle.plugin:0.0.4")
+    implementation("me.walkerknapp.use-cmake-library:me.walkerknapp.use-cmake-library.gradle.plugin:0.0.5")
     implementation("org.apache.commons:commons-lang3:3+")
     implementation("commons-io:commons-io:2.11.0")
     implementation("com.dslplatform:dsl-json-java8:1+")

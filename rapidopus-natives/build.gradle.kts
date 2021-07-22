@@ -1,4 +1,5 @@
 import de.undercouch.gradle.tasks.download.Download
+import org.gradle.internal.os.OperatingSystem
 
 apply {
     from("../toolchains.gradle.kts")
@@ -32,7 +33,7 @@ tasks.withType(CppCompile::class).configureEach {
     compilerArgs.addAll(toolChain.map { toolChain ->
         when (toolChain) {
             is VisualCpp -> listOf("/std:c++11")
-            is GccCompatibleToolChain -> listOf("-lstdc++", "-std=c++11", "-static-libgcc", "-static-libstdc++", "-fPIC", "-lssp")
+            is GccCompatibleToolChain -> listOf("-lstdc++", "-std=c++11", "-static-libgcc", "-static-libstdc++", "-fPIC")
             else -> listOf()
         }
     })
@@ -55,7 +56,7 @@ tasks.withType(CppCompile::class).configureEach {
 tasks.withType(LinkSharedLibrary::class).configureEach {
     linkerArgs.addAll(toolChain.map { toolChain ->
         when (toolChain) {
-            is GccCompatibleToolChain -> listOf("-fstack-protector")
+            is GccCompatibleToolChain -> listOf("-fstack-protector-strong")
             else -> listOf()
         }
     })

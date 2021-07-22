@@ -28,6 +28,10 @@ open class OpusBuildPlugin : Plugin<Settings> {
                     machines.os("android").architecture("arm64-v8a"),
                     machines.os("android").x86,
                     machines.os("android").x86_64))
+
+                it.setArguments { args ->
+                    args.add("-DOPUS_STACK_PROTECTOR=OFF")
+                }
             }
         }
     }
