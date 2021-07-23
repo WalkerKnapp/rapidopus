@@ -1,4 +1,4 @@
-package com.walker.rapidopus;
+package me.walkerknapp.rapidopus;
 
 import java.lang.ref.Cleaner;
 import java.nio.ByteBuffer;

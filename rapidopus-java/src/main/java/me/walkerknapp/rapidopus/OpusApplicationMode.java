@@ -1,4 +1,4 @@
-package com.walker.rapidopus;
+package me.walkerknapp.rapidopus;
 
 public enum OpusApplicationMode {
     /**

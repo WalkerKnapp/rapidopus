@@ -1,9 +1,9 @@
 #include <jni.h>
 
-#include "com_walker_rapidopus_OpusEncoder.h"
+#include "me_walkerknapp_rapidopus_OpusEncoder.h"
 #include <opus/opus.h>
 
-JNIEXPORT jlong JNICALL Java_com_walker_rapidopus_OpusEncoder_encoderCreate(JNIEnv *env, jclass jClazz, jint jSampleRate, jint jChannels, jint jApplicationMode) {
+JNIEXPORT jlong JNICALL Java_me_walkerknapp_rapidopus_OpusEncoder_encoderCreate(JNIEnv *env, jclass jClazz, jint jSampleRate, jint jChannels, jint jApplicationMode) {
     int error = OPUS_OK;
 
     auto *encoder = opus_encoder_create(jSampleRate, jChannels, jApplicationMode, &error);
@@ -15,11 +15,11 @@ JNIEXPORT jlong JNICALL Java_com_walker_rapidopus_OpusEncoder_encoderCreate(JNIE
     return reinterpret_cast<jlong>(encoder);
 }
 
-JNIEXPORT void JNICALL Java_com_walker_rapidopus_OpusEncoder_encoderDestroy(JNIEnv *env, jclass jClazz, jlong pEncoder) {
+JNIEXPORT void JNICALL Java_me_walkerknapp_rapidopus_OpusEncoder_encoderDestroy(JNIEnv *env, jclass jClazz, jlong pEncoder) {
     opus_encoder_destroy(reinterpret_cast<OpusEncoder *>(pEncoder));
 }
 
-JNIEXPORT jint JNICALL Java_com_walker_rapidopus_OpusEncoder_encode__J_3SILjava_nio_ByteBuffer_2
+JNIEXPORT jint JNICALL Java_me_walkerknapp_rapidopus_OpusEncoder_encode__J_3SILjava_nio_ByteBuffer_2
     (JNIEnv *env, jclass jClazz, jlong pEncoder, jshortArray jInputData, jint jFrameSize, jobject jOutputBuffer) {
 
     jboolean isCopy = JNI_FALSE;
@@ -35,7 +35,7 @@ JNIEXPORT jint JNICALL Java_com_walker_rapidopus_OpusEncoder_encode__J_3SILjava_
     return ret;
 }
 
-JNIEXPORT jint JNICALL Java_com_walker_rapidopus_OpusEncoder_encode__JLjava_nio_ByteBuffer_2ILjava_nio_ByteBuffer_2
+JNIEXPORT jint JNICALL Java_me_walkerknapp_rapidopus_OpusEncoder_encode__JLjava_nio_ByteBuffer_2ILjava_nio_ByteBuffer_2
     (JNIEnv *env, jclass jClazz, jlong pEncoder, jobject jInputBuffer, jint jFrameSize, jobject jOutputBuffer) {
 
     auto *inData = reinterpret_cast<short *>(env->GetDirectBufferAddress(jInputBuffer));
@@ -45,7 +45,7 @@ JNIEXPORT jint JNICALL Java_com_walker_rapidopus_OpusEncoder_encode__JLjava_nio_
     return opus_encode(reinterpret_cast<OpusEncoder *>(pEncoder), inData, jFrameSize, outData, outSize);
 }
 
-JNIEXPORT jint JNICALL Java_com_walker_rapidopus_OpusEncoder_encodeFloat__J_3FILjava_nio_ByteBuffer_2
+JNIEXPORT jint JNICALL Java_me_walkerknapp_rapidopus_OpusEncoder_encodeFloat__J_3FILjava_nio_ByteBuffer_2
     (JNIEnv *env, jclass jClazz, jlong pEncoder, jfloatArray jInputData, jint jFrameSize, jobject jOutputBuffer) {
 
     jboolean isCopy = JNI_FALSE;
@@ -61,7 +61,7 @@ JNIEXPORT jint JNICALL Java_com_walker_rapidopus_OpusEncoder_encodeFloat__J_3FIL
     return ret;
 }
 
-JNIEXPORT jint JNICALL Java_com_walker_rapidopus_OpusEncoder_encodeFloat__JLjava_nio_ByteBuffer_2ILjava_nio_ByteBuffer_2
+JNIEXPORT jint JNICALL Java_me_walkerknapp_rapidopus_OpusEncoder_encodeFloat__JLjava_nio_ByteBuffer_2ILjava_nio_ByteBuffer_2
     (JNIEnv *env, jclass jClazz, jlong pEncoder, jobject jInputBuffer, jint jFrameSize, jobject jOutputBuffer) {
 
     auto *inData = reinterpret_cast<float *>(env->GetDirectBufferAddress(jInputBuffer));
