@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'me.walkerknapp:rapidopus:1.1.0'
+    implementation 'me.walkerknapp:rapidopus:2.0.0'
 }
 ```
 
@@ -20,7 +20,7 @@ dependencies {
 <dependency>
   <groupId>me.walkerknapp</groupId>
   <artifactId>rapidopus</artifactId>
-  <version>1.1.0</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 
