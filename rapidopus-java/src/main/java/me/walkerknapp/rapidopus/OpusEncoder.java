@@ -3,6 +3,9 @@ package me.walkerknapp.rapidopus;
 import java.lang.ref.Cleaner;
 import java.nio.ByteBuffer;
 
+/**
+ * An object that encodes packets of audio information into opus-encoded packets.
+ */
 public class OpusEncoder implements AutoCloseable {
 
     static class State implements Runnable {

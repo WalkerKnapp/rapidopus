@@ -7,7 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * Core information for the RapidOpus library and internal libopus library.
+ */
 public class RapidOpus {
+    /**
+     * The cleaner for objects allocated by RapidOpus. Intended for internal use only.
+     */
     public static final Cleaner cleaner = Cleaner.create();
 
     static {

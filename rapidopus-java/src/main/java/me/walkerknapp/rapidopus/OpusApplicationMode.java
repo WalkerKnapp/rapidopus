@@ -1,5 +1,8 @@
 package me.walkerknapp.rapidopus;
 
+/**
+ * An operating mode to start the Opus encoder with, to optimize for different voice signals and network scenarios.
+ */
 public enum OpusApplicationMode {
     /**
      * Gives best quality at a given bitrate for voice signals.
@@ -11,7 +14,7 @@ public enum OpusApplicationMode {
     VOIP(2048),
     /**
      * Gives best quality at a given bitrate for most non-voice signals like music.
-     * Use this mdoe for music and mixed (music/voice) content, broadcast, and applications requiring <15ms of delay.
+     * Use this mdoe for music and mixed (music/voice) content, broadcast, and applications requiring {@literal <}15ms of delay.
      */
     AUDIO(2049),
     /**
@@ -25,6 +28,11 @@ public enum OpusApplicationMode {
         this.id = id;
     }
 
+    /**
+     * Determines the application mode from the internal integer representation.
+     * @param id The internal integer representation of this mode.
+     * @return The application mode.
+     */
     public static OpusApplicationMode valueOf(int id) {
         switch (id) {
             case 2048:

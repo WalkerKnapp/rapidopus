@@ -1,24 +1,27 @@
 package me.walkerknapp.rapidopus;
 
+/**
+ * A specification for the bandwidth of an individual audio packet received by a decoder.
+ */
 public enum OpusBandwidth {
     /**
-     *  < 4 kHz bandpass
+     *  {@literal <}4 kHz bandpass
      */
     NARROWBAND(1101),
     /**
-     *  < 6 kHz bandpass
+     *  {@literal <}6 kHz bandpass
      */
     MEDIUMBAND(1102),
     /**
-     *  < 8 kHz bandpass
+     *  {@literal <}8 kHz bandpass
      */
     WIDEBAND(1103),
     /**
-     *  < 12 kHz bandpass
+     *  {@literal <}12 kHz bandpass
      */
     SUPERWIDEBAND(1104),
     /**
-     *  < 20 kHz bandpass
+     *  {@literal <}20 kHz bandpass
      */
     FULLBAND(1105);
 
@@ -28,6 +31,11 @@ public enum OpusBandwidth {
         this.id = id;
     }
 
+    /**
+     * Determines the bandwidth specification from the internal integer representation.
+     * @param id The internal integer representation.
+     * @return The bandwidth specification.
+     */
     public static OpusBandwidth valueOf(int id) {
         switch (id) {
             case 1101:

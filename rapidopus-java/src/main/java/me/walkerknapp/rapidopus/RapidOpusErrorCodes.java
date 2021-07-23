@@ -1,5 +1,8 @@
 package me.walkerknapp.rapidopus;
 
+/**
+ * Error codes that can be returned by Opus processes.
+ */
 public class RapidOpusErrorCodes {
     /**
      * No Error
@@ -34,6 +37,11 @@ public class RapidOpusErrorCodes {
      */
     public static final int OPUS_ALLOC_FAIL = -7;
 
+    /**
+     * Translates an error represented by its internal integer representation into a String description.
+     * @param error A String description of the error.
+     * @return The internal integer representation of an error.
+     */
     public static String translateError(int error) {
         switch (error) {
             case OPUS_OK:

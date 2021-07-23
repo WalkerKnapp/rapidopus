@@ -3,6 +3,9 @@ package me.walkerknapp.rapidopus;
 import java.lang.ref.Cleaner;
 import java.nio.ByteBuffer;
 
+/**
+ * An object that decodes an audio stream encoded in opus, returning decoded packets of audio data.
+ */
 public class OpusDecoder implements AutoCloseable {
 
     static class State implements Runnable {
